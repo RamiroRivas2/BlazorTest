@@ -7,23 +7,31 @@
 
 <h3>@(Client.Id == 0 ? "Add Client" : "Edit Client")</h3>
 
-<div class="mb-3">
-    <label class="form-label">Name</label>
-    <input class="form-control" @bind="Client.Name" />
-</div>
+<EditForm Model="Client" OnValidSubmit="SaveClient">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
 
-<div class="mb-3">
-    <label class="form-label">Email</label>
-    <input class="form-control" @bind="Client.Email" />
-</div>
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <InputText class="form-control" @bind-Value="Client.Name" />
+        <ValidationMessage For="@(() => Client.Name)" />
+    </div>
 
-<div class="mb-3">
-    <label class="form-label">Phone</label>
-    <input class="form-control" @bind="Client.Phone" />
-</div>
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <InputText class="form-control" @bind-Value="Client.Email" />
+        <ValidationMessage For="@(() => Client.Email)" />
+    </div>
 
-<button class="btn btn-success" @onclick="SaveClient">Save</button>
-<button class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+    <div class="mb-3">
+        <label class="form-label">Phone</label>
+        <InputText class="form-control" @bind-Value="Client.Phone" />
+        <ValidationMessage For="@(() => Client.Phone)" />
+    </div>
+
+    <button class="btn btn-success" type="submit">Save</button>
+    <button class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+</EditForm>
 
 @code {
     [Parameter] public int Id { get; set; }
